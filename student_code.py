@@ -142,6 +142,81 @@ class KnowledgeBase(object):
         """
         ####################################################
         # Student code goes here
+        string = ''
+        if isinstance(fact_or_rule, Fact):
+            if fact_or_rule not in self.facts:
+                string += 'Fact is not in the KB'
+                return string
+            string += fact_or_rule.name + ': '+str(fact_or_rule.statement) + '\n  '
+            ind = self.facts.index(fact_or_rule)
+            for item in self.facts[ind].supported_by:
+                string += 'SUPPORTED BY'+'\n  '
+                for fr in item:
+                    if isinstance(fr, Fact):
+                        F = self.facts[self.facts.index(fr)]
+                        if F.asserted:
+                            string +='  '+str(F.name)+': '+str(F.statement) + ' ASSERTED'+'\n'
+                        else:
+                            string +=self.kb_explain(F)
+                    if isinstance(fr, Rule):
+                        R = self.rules[self.rules.index(fr)]
+                        if R.asserted:
+                            string += '  '+str(R.name)+ ': ('
+                            statement = [str(x) for x in R.lhs]
+                            string += ", ".join(statement)
+                            string += ')'+' -> '+str(R.rhs)+' ASSERTED'+'\n'
+                        else:
+                            string +=self.kb_explain(R)
+
+        if isinstance(fact_or_rule, Rule):
+            if fact_or_rule not in self.rules:
+                string = 'Rule is not in the KB'
+                return string
+            string += fact_or_rule.name + ': ('
+            statement = [str(x) for x in fact_or_rule.lhs]
+            string += ", ".join(statement)
+            string += ')'+' -> '+str(fact_or_rule.rhs)+'\n  '
+            ind = self.rules.index(fact_or_rule)
+            for item in self.rules[ind].supported_by:
+                string +='SUPPORTED BY' + '\n  '
+                for fr in item:
+                    if isinstance(fr, Fact):
+                        F = self.facts[self.facts.index(fr)]
+                        if F.asserted:
+                            string +='  '+str(F.name)+': '+str(F.statement) + ' ASSERTED'+'\n'
+                        else:
+                            string +=self.kb_explain(F)
+                    if isinstance(fr, Rule):
+                        R = self.rules[self.rules.index(fr)]
+                        if R.asserted:
+                            string += '  '+str(R.name)+ ': ('
+                            statement = [str(x) for x in R.lhs]
+                            string += ", ".join(statement)
+                            string += ')'+' -> '+str(R.rhs)+' ASSERTED'+'\n'
+                        else:
+                            string += '  '+ self.kb_explain(R)
+        print(string)
+        return string
+'''        if isinstance(fact_or_rule, Rule):
+            if fact_or_rule not in self.rules:
+                string = 'Rule is not in the KB'
+                return string
+            string = fact_or_rule.name + str(fact_or_rule.statement) + '\n'
+            ind = self.rules.index(fact_or_rule)
+            for item in self.rules[ind].supported_by:
+                string += '\t' + 'SUPPORTED BY' + '\n'
+                if isinstance(item, Fact):
+                    if item.asserted:
+                        string += '\t' + item.name + ':' +'\000'+ str(self.statement) +'\000' + 'ASSERTED'+'\n'
+                    else:
+                        kb_explain(item)
+                if isinstance(item, Rule):
+                    if item.asserted:
+                        string += '\t' + item.name + ':' + '\000'+ str(self.statement) +'\000' + 'ASSERTED'+'\n'
+                    else:
+                        kb_explain(item)'''
+        
+
 
 
 class InferenceEngine(object):
