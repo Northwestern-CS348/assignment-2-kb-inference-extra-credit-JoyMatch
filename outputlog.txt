@@ -1,0 +1,26 @@
+TESTS WITH ERRORS 
+-------------------------------
+TESTS FAILED  
+test03 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "/Users/k2i/academics/automatedgradingapp/app/testing/kb-inference-ec/gradingtests.py", line 73, in test03
+    self.assertEqual(self.KB.kb_explain(fact4), answer1)
+AssertionError: 'fact[59 chars]TED\nrule: ((bigger A B)) -> (covered B)\n  SU[189 chars]ED\n' != 'fact[59 chars]TED\n    rule: ((bigger A B)) -> (covered B)\n[235 chars]ED\n'
+Diff is 667 characters long. Set self.maxDiff to None to see it.
+
+test04 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "/Users/k2i/academics/automatedgradingapp/app/testing/kb-inference-ec/gradingtests.py", line 135, in test04
+    self.compare(self.expected, actual)
+  File "/Users/k2i/academics/automatedgradingapp/app/testing/kb-inference-ec/gradingtests.py", line 18, in compare
+    '"{0}" ({1} lead spaces)'.format(a, len(a) - len(a.strip())))
+AssertionError: '"    rule: ((eats herbivore leaves)) -> (eats nyala leaves)" (4 lead spaces)' != '"rule: ((eats herbivore leaves)) -> (eats nyala leaves)" (0 lead spaces)'
+- "    rule: ((eats herbivore leaves)) -> (eats nyala leaves)" (4 lead spaces)
+?  ----                                                         ^
++ "rule: ((eats herbivore leaves)) -> (eats nyala leaves)" (0 lead spaces)
+?                                                           ^
+
+
+-------------------------------
+TESTS SKIPPED 
+-------------------------------
